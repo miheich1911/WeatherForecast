@@ -1,0 +1,48 @@
+{% extends 'default.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Приложение "Погода"</h1>
+
+            <div class="col-5 ">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <label for="city">Город</label>
+                    {{ form.name }}
+                    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+                </form>
+                    <script>
+                        $(function() {
+                        $("#city").autocomplete({
+                        source: "{% url 'city-autocomplete' %}",
+                        minLength: 2, // Minimum characters before triggering autocomplete
+                            });
+                        });
+                    </script>
+            </div>
+    </div>
+    <div class="container">
+            <div class="col-5">
+                {% if info %}
+                <h1>Информация</h1>
+                <div class="alert alert-light">
+                    <b>Город:</b> {{ info.city }}<br>
+                    <b>Температура:</b> {{ info.temp }}<br>
+                </div>
+                {% endif %}
+            </div>
+    </div>
+    <div class="container">
+            <div class="col-5 offset-7">
+            {% if request.user.is_authenticated %}
+                <h1>История поиска</h1>
+                {% for city in cearch_city %}
+                <div class="alert alert-light">
+                    <b>Город:</b> {{ city }}<br>
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+    </div>
+
+
+{% endblock content %}
