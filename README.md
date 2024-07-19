@@ -1,4 +1,4 @@
-Проект WeatherForecast
+Проект WeatherForecast.
 Использованны технологии pycharm, django, requests
 Выполнены задачи:
     -сделаны автодополнение (подсказки) при вводе города
